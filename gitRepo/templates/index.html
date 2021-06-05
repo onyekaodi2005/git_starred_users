@@ -1,0 +1,101 @@
+<html>
+
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Page level plugin JavaScript--><script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    <title>Git Users Ranked By Stars</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #555151;
+            text-align: left;
+            padding: 8px;
+        }
+        .center {
+            margin: auto;
+            width: 60%;
+            border: 3px solid #4b4d48;
+            padding: 10px;
+            }
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        .styled-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+        .styled-table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+        }
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h3 style="text-align: center; font-family: Lucida Handwriting">GITS TOP STARRED USERS AND INFO</h3>
+    <div class="container">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    {% for row in data[0].keys() %}
+                    <th style="background-color: black; color: white;">{{ row }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for row in data %}
+                    <tr>
+                        <th>{{ row['REPOSITORY ID'] }}</th>
+                        <th>{{ row['NAME'] }}</th>
+                        <th>{{ row['URL'] }}</th>
+                        <th>{{ row['CREATED DATE'] }}</th>
+                        <th>{{ row['PUSH DATE'] }}</th>
+                        <th>{{ row['DESCRIPTION'] }}</th>
+                        <th>{{ row['STARS ⭐️⭐️⭐️'] }}</th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <script>
+            $(function () {
+                $('#dataTable').DataTable({
+                  "pageLength": 10,
+                  "paging": true,
+                  "lengthChange": true,
+                  "lengthMenu": [[10, 25, 50, 75, -1], [10, 25, 50, 75, 100, "All"]],
+                  "searching": true,
+                  "ordering": true,
+                  "info": true,
+                  "autoWidth": false
+                  });
+              });
+            
+            
+            
+        </script>
+    </div>
+    
+    
+</body>
+
+</html>
