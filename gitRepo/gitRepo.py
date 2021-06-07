@@ -27,7 +27,6 @@ db.create_all()
 def getApiData(url, kwargs):
     result = requests.get(url=url, params=kwargs)
     if result.status_code == 200:
-        x = []
         for i in result.json()['items']:
             result = GitModel.query.filter_by(repository_id=i.get('id')).first()
             if result:
@@ -49,7 +48,7 @@ def fallback(unknown=None):
     return redirect(url_for("home"))
 
 if '__main__' == __name__:
-    params = {'page': 1, 'per_page': 100, 'order': 'desc','sort': 'stars'}
+    params = {'page': 0, 'per_page': 100, 'order': 'desc','sort': 'stars'}
     URL = 'https://api.github.com/search/repositories?q=language:python'
     pool = Pool(processes=(cpu_count() - 1))
     
